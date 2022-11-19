@@ -33,21 +33,30 @@ public class AgentMovingState: AgentState {
         // Testing purposes
         ctx.material.color = Color.red;
 
-        // Start moving sub-states
-        InitializeSubState();
+        // Grounded sub state
+        ctx.StartCoroutine(InitialiseGroundedSubState());
+
     }
     public override void UpdateState() {}
-    public override void CheckSwitchState() {
-        if ((ctx.transform.position - target).sqrMagnitude < 0.125f) {
-            SwitchState(factory.Idle());
-        }
-    }
+    public override void CheckSwitchState() {}
     public override void FixedUpdateState() {}
     public override void InitializeSubState() {
         SetSubState(factory.MovingGrounded());
         subState.EnterState();
     }
     public override void ExitState() {}
+
+    #endregion
+
+    #region Moving state functions
+
+    // Wait until grounded before initilazing substate
+    private IEnumerator InitialiseGroundedSubState() {
+        while (!ctx.grounded) {
+            yield return null;
+        }
+        InitializeSubState();
+    }
 
     #endregion
     

@@ -28,21 +28,11 @@ public class AgentMovingJumpingState : AgentState {
         _superState = (AgentMovingState) superState;
 
         // Jump
-        // Vector3 dir = (new Vector3(_superState.target.x, 0,
-        //     _superState.target.z) - ctx.transform.position)
-        //     .normalized;
-        // ctx.rigidBody.AddForce(
-        //     new Vector3(dir.x, 1.25f, dir.z),
-        //     ForceMode.Impulse
-        // );
-
-        Vector3 rawDir = (new Vector3(_superState.target.x, 0,
-            _superState.target.z) - ctx.transform.position);
-        Vector3 dir = rawDir.normalized;
-        dir.y = 1f;
-        Vector3 jump = dir * Mathf.Clamp(rawDir.magnitude, 1.25f, 50f);
+        Vector3 dir = (new Vector3(_superState.target.x, 0,
+            _superState.target.z) - ctx.transform.position)
+            .normalized;
         ctx.rigidBody.AddForce(
-            jump,
+            new Vector3(dir.x, 1.75f, dir.z),
             ForceMode.Impulse
         );
 

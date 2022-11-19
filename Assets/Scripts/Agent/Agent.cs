@@ -28,6 +28,9 @@ public class Agent : MonoBehaviour {
         // Warning: Use SwitchState instead!
         set {_state = value;}
     }
+    public AgentStateFactory stateFactory {
+        get {return _stateFactory;}
+    }
     public Material material {
         get {return _material;}
     }
@@ -53,14 +56,8 @@ public class Agent : MonoBehaviour {
         _state.EnterState();
     }
 
+    // State Functions
     private void Update() {
-
-        // Go through the move queue... 
-        if (_state is AgentIdleState && _targetQueue.Count > 0) {
-            Move(_targetQueue.Dequeue());
-        }
-
-        // State Functions
         _state.UpdateStates();
         _state.CheckSwitchStates();
     }
@@ -97,9 +94,9 @@ public class Agent : MonoBehaviour {
         _state.SwitchState(_stateFactory.Moving(target));
     }
 
-    // Request a move to a point
-    public void RequestMove(Vector3 target) {
-        _targetQueue.Enqueue(target);
+    // Return to idle state
+    public void Idle() {
+        _state.SwitchState(_stateFactory.Idle());
     }
 
     #endregion

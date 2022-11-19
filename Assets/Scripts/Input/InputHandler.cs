@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour {
     
     private Camera _mainCam; 
-    [SerializeField] private Agent _agent;
+    [SerializeField] private AgentController _agentController;
 
     private void Start() {
         _mainCam = Camera.main;
@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit[] hits = CastRay();
-            _agent.RequestMove(hits[0].point);
+            _agentController.RequestPath(new List<Vector3>() {hits[0].point});
         }
 
     }
