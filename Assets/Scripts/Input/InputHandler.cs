@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
     
-    private Camera _mainCam; 
-    [SerializeField] private AgentController _agentController;
+    private Camera _mainCam;
+    private GameObject _selectedObject;
 
     private void Start() {
         _mainCam = Camera.main;
@@ -15,7 +15,25 @@ public class InputHandler : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit[] hits = CastRay();
-            _agentController.RequestPath(new List<Vector3>() {hits[0].point});
+
+            foreach (RaycastHit hit in hits) {
+                GameObject hitObject = hit.collider.gameObject;
+                if (hitObject.TryGetComponent<Selectable>(out var selectable)) {
+                    selectable.Toggle();
+                    if (selectable.selected) {
+                        _selectedObject = hitObject;
+                    } else {
+                        _selectedObject = null;
+                    }
+                }
+            }
+
+            if (_selectedObject != null && 
+                _selectedObject.TryGetComponent<AgentController>(out var agentController)) {
+                
+                agentController.RequestPath(new List<Vector3>() {hits[0].point});
+            }
+
         }
 
     }
@@ -26,6 +44,5 @@ public class InputHandler : MonoBehaviour {
         ray.direction, 2000f);
         return hits;
     }
-
 
 }
