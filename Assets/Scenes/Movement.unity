@@ -417,6 +417,8 @@ GameObject:
   - component: {fileID: 1083920718}
   - component: {fileID: 1083920717}
   - component: {fileID: 1083920716}
+  - component: {fileID: 1083920720}
+  - component: {fileID: 1083920721}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -502,6 +504,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1083920720
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083920715}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &1083920721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083920715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea4adb45de2b8f49a33df3b51082ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grounded: 0
+  _transform: {fileID: 1083920719}
+  _renderer: {fileID: 1083920717}
+  _rigidBody: {fileID: 1083920720}
 --- !u!1 &1269486627
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1269486628}
+  - component: {fileID: 1269486629}
   m_Layer: 0
   m_Name: Camera Pivot
   m_TagString: Untagged
@@ -534,6 +569,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 25, y: 45, z: 0}
+--- !u!114 &1269486629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269486627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0458622328685f34399474abaaf52fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: 1083920721}
 --- !u!1 &1826287016
 GameObject:
   m_ObjectHideFlags: 0
