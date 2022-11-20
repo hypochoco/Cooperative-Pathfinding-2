@@ -5,7 +5,9 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour {
     
     private Camera _mainCam;
-    private GameObject _selectedObject;
+    [SerializeField] private GameObject _selectedObject;
+    [SerializeField] private GameObject _gridGameObject;
+    private Grid<GridNode> _grid;
 
     private void Start() {
         _mainCam = Camera.main;
@@ -15,6 +17,14 @@ public class InputHandler : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0)) {
             RaycastHit[] hits = CastRay();
+
+            if (_selectedObject != null && 
+                _selectedObject.TryGetComponent<AgentController>(out var agentController)) {
+                
+                TestPathfinding(agentController, hits[0].point);
+                // agentController.RequestPath(new List<Vector3>() {hits[0].point});
+
+            }
 
             foreach (RaycastHit hit in hits) {
                 GameObject hitObject = hit.collider.gameObject;
@@ -28,12 +38,6 @@ public class InputHandler : MonoBehaviour {
                 }
             }
 
-            if (_selectedObject != null && 
-                _selectedObject.TryGetComponent<AgentController>(out var agentController)) {
-                
-                agentController.RequestPath(new List<Vector3>() {hits[0].point});
-            }
-
         }
 
     }
@@ -43,6 +47,40 @@ public class InputHandler : MonoBehaviour {
         RaycastHit[] hits = Physics.RaycastAll(ray.origin, 
         ray.direction, 2000f);
         return hits;
+    }
+
+    // pathfinding test
+    private void TestPathfinding(
+        AgentController agentController, Vector3 targetPosition) {
+
+        _grid = _gridGameObject.GetComponent<GridGameObject>().grid;
+        Pathfinding pathfinding = new Pathfinding(_grid);
+        (int, int, int) startPosition = 
+            _grid.GetCoord(agentController.agent.transform.position);
+        (int, int, int) endPosition = 
+            _grid.GetCoord(targetPosition);
+
+        List<GridNode> gridNodePath = pathfinding.FindPath(
+            startPosition.Item1,
+            0,
+            startPosition.Item3,
+            endPosition.Item1,
+            endPosition.Item2,
+            endPosition.Item3);
+
+        if (gridNodePath == null) {
+            Debug.Log("No path found!");
+            return;
+        }
+
+        List<Vector3> path = new List<Vector3>();
+        gridNodePath.RemoveAt(0);
+        foreach (GridNode gridNode in gridNodePath) {
+            path.Add(_grid.GetWorld(gridNode.x, gridNode.y, gridNode.z));
+        }
+
+        agentController.RequestPath(path);
+
     }
 
 }

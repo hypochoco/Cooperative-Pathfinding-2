@@ -26,9 +26,7 @@ public class AgentMovingFallingState : AgentState {
             SwitchState(factory.MovingGrounded());
         }
     }
-    public override void FixedUpdateState() {
-        // ctx.rigidBody.AddForce(5f * Vector3.down);
-    }
+    public override void FixedUpdateState() {}
     public override void InitializeSubState() {}
     public override void ExitState() {}
 

@@ -10,7 +10,6 @@ public class Agent : MonoBehaviour {
     // Agent variables
     private float _distToGround;
     [SerializeField] private bool _grounded;
-    [SerializeField] private Queue<Vector3> _targetQueue;
 
     // Agent reference variables
     [SerializeField] private Transform _transform;
@@ -50,7 +49,6 @@ public class Agent : MonoBehaviour {
         _distToGround = 0.13f;
         _grounded = false;
         _material = _renderer.material;
-        _targetQueue = new Queue<Vector3>();
         _stateFactory = new AgentStateFactory(this);
         _state = _stateFactory.Idle();
         _state.EnterState();

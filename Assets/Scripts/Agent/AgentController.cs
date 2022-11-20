@@ -5,11 +5,16 @@ using UnityEngine;
 public class AgentController : MonoBehaviour {
     
     // Variables
-    public Agent _agent;
+    [SerializeField] private Agent _agent;
     private LinePath _linePath;
-    private int _pathIndex;
+    [SerializeField] private int _pathIndex;
 
     private float _turnDst;
+
+    // Getters and setters
+    public Agent agent {
+        get {return _agent;}
+    }
 
     // Initialize variables
     private void Start() {

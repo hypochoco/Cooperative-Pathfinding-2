@@ -31,12 +31,16 @@ public class AgentMovingGroundedState : AgentState {
         ctx.transform.rotation = 
             Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
 
-        // Enter jump state
-        SwitchState(factory.MovingJumping());
-
     }
     public override void UpdateState() {}
-    public override void CheckSwitchState() {}
+    public override void CheckSwitchState() {
+
+        // Ensure grounded and enter jump state
+        if (ctx.grounded && ctx.rigidBody.velocity.y <= 0) {
+            SwitchState(factory.MovingJumping());
+        }        
+
+    }
     public override void FixedUpdateState() {}
     public override void InitializeSubState() {}
     public override void ExitState() {}
