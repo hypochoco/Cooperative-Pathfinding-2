@@ -64,9 +64,6 @@ public class InputHandler : MonoBehaviour {
         (int, int, int) endPosition = 
             _grid.GetCoord(targetPosition);
 
-        Debug.Log("start: " + startPosition);
-        Debug.Log("target: " + endPosition);
-
         List<GridNode> gridNodePath = pathfinding.FindPath(
             startPosition.Item1,
             startPosition.Item2,

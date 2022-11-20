@@ -56,7 +56,7 @@ public class Line {
 
 	// Testing purposes
 	public void DrawWithGizmos(float length, float yPos) {
-		Gizmos.color = Color.black;
+		Gizmos.color = Color.red;
 		Vector3 lineDir = new Vector3(1, 0, _gradient).normalized;
 		Vector3 lineCenter = 
         new Vector3(_pointOnLine_1.x, yPos, _pointOnLine_1.y) + 0.1f * Vector3.up;

@@ -7,9 +7,8 @@ public class AgentMovingJumpingState : AgentState {
     #region State Variables
 
     private AgentMovingState _superState;
-    private bool _jumped;
     private Vector3 _dir;
-    private float _targetVelocity;
+    private bool _jumped;
 
     #endregion
 
@@ -30,11 +29,9 @@ public class AgentMovingJumpingState : AgentState {
         _superState = (AgentMovingState) superState;
 
         // Jump
-        _targetVelocity = 10f;
-        _dir = (_superState.target - ctx.transform.position)
-            .normalized;
+        _dir = (_superState.target - ctx.transform.position);
         ctx.rigidBody.AddForce(
-            new Vector3(0, _dir.y > 0.2? 2.5f : 1.75f, 0),
+            new Vector3(0, _dir.y > 0.1? 2.75f : 1.75f, 0),
             ForceMode.Impulse
         );
 
@@ -48,8 +45,8 @@ public class AgentMovingJumpingState : AgentState {
         }
     }
     public override void FixedUpdateState() {
-        ctx.rigidBody.velocity += 
-            new Vector3(_dir.x, 0, _dir.z) * 5f * Time.deltaTime;
+        ctx.rigidBody.velocity += 5f * Time.deltaTime * 
+            new Vector3(_dir.x, 0, _dir.z).normalized;
     }
     public override void InitializeSubState() {}
     public override void ExitState() {}

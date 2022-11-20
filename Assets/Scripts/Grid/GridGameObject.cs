@@ -39,20 +39,24 @@ public class GridGameObject : MonoBehaviour {
         // create a grid
         Grid<GridNode> grid = new Grid<GridNode>(cellSize, cellSizeY);
 
+        // Main grid
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                GridNode test = new GridNode(i, 0, j);
-                grid.Add(i, 0, j, test);
+                grid.Add(i, 0, j, new GridNode(i, 0, j));
             }
         }
 
         // Manual Grid Additions
-        GridNode test0 = new GridNode(10, 1, 5);
-        grid.Add(test0.x, test0.y, test0.z, test0);
+        grid.Add(10, 1, 5, new GridNode(10, 1, 5));
+        grid.Add(11, 2, 5, new GridNode(11, 2, 5));
+        grid.Add(12, 3, 5, new GridNode(12, 3, 5));
 
-        // Manual Grid Additions
-        GridNode test1 = new GridNode(11, 2, 5);
-        grid.Add(test1.x, test1.y, test1.z, test1);
+        // Secondary grid
+        for (int i = 13; i < 22; i++) {
+            for (int j = 1; j < 10; j++) {
+                grid.Add(i, 3, j, new GridNode(i, 3, j));
+            }
+        }
 
         // Return Preset
         return grid;

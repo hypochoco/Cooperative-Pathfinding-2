@@ -66,10 +66,10 @@ public class LinePath {
 
     // Testing Purposes
     public void DrawWithGizmos() {
-        Gizmos.color = Color.black;
+        Gizmos.color = Color.red;
         for (int i = 0; i < _lookPoints.Length; i++) {
             Gizmos.DrawCube(_lookPoints[i], 0.1f * Vector3.one);
-            _turnBoundaries[i].DrawWithGizmos(1f, _lookPoints[i].y);
+            _turnBoundaries[i].DrawWithGizmos(0.5f, _lookPoints[i].y);
         }
     }
 
