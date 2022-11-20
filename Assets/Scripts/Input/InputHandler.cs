@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
     
+    // fix this to be better and toggle correctly and stuff... 
+
     private Camera _mainCam;
     [SerializeField] private GameObject _selectedObject;
     [SerializeField] private GameObject _gridGameObject;
@@ -55,14 +57,19 @@ public class InputHandler : MonoBehaviour {
 
         _grid = _gridGameObject.GetComponent<GridGameObject>().grid;
         Pathfinding pathfinding = new Pathfinding(_grid);
+        Vector3 pos = agentController.agent.transform.position
+            + 0.125f * Vector3.down;
         (int, int, int) startPosition = 
-            _grid.GetCoord(agentController.agent.transform.position);
+            _grid.GetCoord(pos);
         (int, int, int) endPosition = 
             _grid.GetCoord(targetPosition);
 
+        Debug.Log("start: " + startPosition);
+        Debug.Log("target: " + endPosition);
+
         List<GridNode> gridNodePath = pathfinding.FindPath(
             startPosition.Item1,
-            0,
+            startPosition.Item2,
             startPosition.Item3,
             endPosition.Item1,
             endPosition.Item2,

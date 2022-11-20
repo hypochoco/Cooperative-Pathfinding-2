@@ -73,17 +73,18 @@ public class Agent : MonoBehaviour {
 
         // Cache values
         Vector3 pos = _transform.position;
-        Vector2 perp2D = Vector2.
-            Perpendicular(new Vector2(pos.x, pos.z));
-        Vector3 perp = new Vector3(perp2D.x, 0, perp2D.y);
 
         // Check each corner for grounded
         return (
             Physics.Raycast(pos, Vector3.down, _distToGround) ||
-            Physics.Raycast(pos + perp, Vector3.down, _distToGround) ||
-            Physics.Raycast(pos - perp, Vector3.down, _distToGround) ||
-            Physics.Raycast(-pos + perp, Vector3.down, _distToGround) ||
-            Physics.Raycast(-pos - perp, Vector3.down, _distToGround)
+            Physics.Raycast(pos + 0.125f * (_transform.forward + _transform.right), 
+                Vector3.down, _distToGround) ||
+            Physics.Raycast(pos + 0.125f * (_transform.forward - _transform.right), 
+                Vector3.down, _distToGround) ||
+            Physics.Raycast(pos + 0.125f * (-_transform.forward + _transform.right), 
+                Vector3.down, _distToGround) ||
+            Physics.Raycast(pos + 0.125f * (-_transform.forward - _transform.right), 
+                Vector3.down, _distToGround)
         );
     }
 
@@ -96,6 +97,26 @@ public class Agent : MonoBehaviour {
     public void Idle() {
         _state.SwitchState(_stateFactory.Idle());
     }
+
+    #endregion
+
+
+    #region Debug
+
+    // Testing purposes - draw grounded... 
+	public void OnDrawGizmos() {
+        Vector3 pos = _transform.position;
+        Gizmos.color = Color.black;
+		Gizmos.DrawLine(pos, pos + 0.125f * Vector3.down);
+        Gizmos.DrawLine(pos + 0.125f * (_transform.forward - _transform.right), 
+            pos + 0.125f * (_transform.forward - _transform.right) + 0.125f * Vector3.down);
+        Gizmos.DrawLine(pos + 0.125f * (_transform.forward + _transform.right), 
+            pos + 0.125f * (_transform.forward + _transform.right) + 0.125f * Vector3.down);
+        Gizmos.DrawLine(pos + 0.125f * (-_transform.forward - _transform.right), 
+            pos + 0.125f * (-_transform.forward - _transform.right) + 0.125f * Vector3.down);
+        Gizmos.DrawLine(pos + 0.125f * (-_transform.forward + _transform.right), 
+            pos + 0.125f * (-_transform.forward + _transform.right) + 0.125f * Vector3.down);
+	}
 
     #endregion
 
