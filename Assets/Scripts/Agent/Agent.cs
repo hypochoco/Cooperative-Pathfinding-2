@@ -104,19 +104,19 @@ public class Agent : MonoBehaviour {
     #region Debug
 
     // Testing purposes - draw grounded... 
-	public void OnDrawGizmos() {
-        Vector3 pos = _transform.position;
-        Gizmos.color = Color.black;
-		Gizmos.DrawLine(pos, pos + 0.125f * Vector3.down);
-        Gizmos.DrawLine(pos + 0.125f * (_transform.forward - _transform.right), 
-            pos + 0.125f * (_transform.forward - _transform.right) + 0.125f * Vector3.down);
-        Gizmos.DrawLine(pos + 0.125f * (_transform.forward + _transform.right), 
-            pos + 0.125f * (_transform.forward + _transform.right) + 0.125f * Vector3.down);
-        Gizmos.DrawLine(pos + 0.125f * (-_transform.forward - _transform.right), 
-            pos + 0.125f * (-_transform.forward - _transform.right) + 0.125f * Vector3.down);
-        Gizmos.DrawLine(pos + 0.125f * (-_transform.forward + _transform.right), 
-            pos + 0.125f * (-_transform.forward + _transform.right) + 0.125f * Vector3.down);
-	}
+	// public void OnDrawGizmos() {
+    //     Vector3 pos = _transform.position;
+    //     Gizmos.color = Color.black;
+	// 	Gizmos.DrawLine(pos, pos + 0.125f * Vector3.down);
+    //     Gizmos.DrawLine(pos + 0.125f * (_transform.forward - _transform.right), 
+    //         pos + 0.125f * (_transform.forward - _transform.right) + 0.125f * Vector3.down);
+    //     Gizmos.DrawLine(pos + 0.125f * (_transform.forward + _transform.right), 
+    //         pos + 0.125f * (_transform.forward + _transform.right) + 0.125f * Vector3.down);
+    //     Gizmos.DrawLine(pos + 0.125f * (-_transform.forward - _transform.right), 
+    //         pos + 0.125f * (-_transform.forward - _transform.right) + 0.125f * Vector3.down);
+    //     Gizmos.DrawLine(pos + 0.125f * (-_transform.forward + _transform.right), 
+    //         pos + 0.125f * (-_transform.forward + _transform.right) + 0.125f * Vector3.down);
+	// }
 
     #endregion
 

@@ -5,7 +5,7 @@ using UnityEngine;
 // Physics.CheckSphere...
 
 // RGridConstructor
-public class GridGameObject : MonoBehaviour {
+public class GridComponent : MonoBehaviour {
     
     #region Grid Constructor Variables
     

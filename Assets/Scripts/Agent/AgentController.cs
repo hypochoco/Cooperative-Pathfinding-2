@@ -8,7 +8,6 @@ public class AgentController : MonoBehaviour {
     [SerializeField] private Agent _agent;
     private LinePath _linePath;
     [SerializeField] private int _pathIndex;
-
     private float _turnDst;
 
     // Getters and setters
@@ -29,6 +28,9 @@ public class AgentController : MonoBehaviour {
             return;
         }
         
+        // TODO: Ensure that the agent stays at the thing for some
+        // fixed amount of time!!!
+
         // Go through the path
         Vector2 pos2d = 
             new Vector2(_agent.transform.position.x,_agent.transform.position.z);
