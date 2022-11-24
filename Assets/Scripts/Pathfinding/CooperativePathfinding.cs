@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// turn this into an interface and whatever... 
 public class CooperativePathfinding {
     
     private PathfindingComponent _pathfindingComponent;
@@ -45,7 +46,8 @@ public class CooperativePathfinding {
             _reservationTable.Add(path);
         }
 
-        // 
+        // Find an resolve the first conflict
+        
 
 
     }
